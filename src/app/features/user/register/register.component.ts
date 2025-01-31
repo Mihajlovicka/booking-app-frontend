@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { RegistrationRequestDto } from 'src/app/core/model/user';
 import { UserService } from 'src/app/core/services/user.service';
 import { UserRole } from 'src/app/core/model/user-role';
 import { Router } from '@angular/router';
-import { ServiceResponse } from 'src/app/core/model/service-response';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -25,6 +23,7 @@ export class RegisterComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      username: ['', Validators.required],
       role: [UserRole.GUEST, Validators.required],
       password: ['', Validators.required],
       address: this.fb.group({

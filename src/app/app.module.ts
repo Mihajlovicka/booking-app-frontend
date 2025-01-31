@@ -11,12 +11,17 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms'; // For [(ngModel)] if needed
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AccommodationsListComponent } from './features/accommodation/accommodations-list/accommodations-list.component';
-
+import { ChangeInfoComponent } from './features/user/profile/change-info/change-info.component';
+import { ChangePasswordComponent } from './features/user/profile/change-password/change-password.component';
+import { ProfileComponent } from './features/user/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AccommodationsListComponent
+    AccommodationsListComponent,
+    ProfileComponent,
+    ChangeInfoComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +39,6 @@ import { AccommodationsListComponent } from './features/accommodation/accommodat
     MatInputModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

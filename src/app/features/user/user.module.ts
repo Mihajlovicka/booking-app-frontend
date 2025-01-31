@@ -6,16 +6,8 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { CoreModule } from 'src/app/core/core.module';
 
-
 @NgModule({
-  declarations: [
-    RegisterComponent,
-    LoginComponent
-  ],
-  imports: [
-    CommonModule,
-    CoreModule,
-    UserRoutingModule
-  ]
+  declarations: [RegisterComponent, LoginComponent],
+  imports: [CommonModule, CoreModule, UserRoutingModule],
 })
-export class UserModule { }
+export class UserModule {}

@@ -24,6 +24,7 @@ export class RegistrationRequestDto {
   firstName: string;
   lastName: string;
   address: AddressDto;
+  username: string;
 
   constructor() {
     this.email = '';
@@ -33,6 +34,7 @@ export class RegistrationRequestDto {
     this.firstName = '';
     this.lastName = '';
     this.address = new AddressDto();
+    this.username = '';
   }
 }
 
@@ -52,6 +54,8 @@ export interface UserDto {
   firstName: string;
   lastName: string;
   role: UserRole;
+  username: string;
+  address: AddressDto;
 }
 
 export interface LoginResponseDto {

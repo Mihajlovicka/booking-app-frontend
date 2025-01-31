@@ -1,12 +1,12 @@
 <div class="centered-container">
   <mat-card class="main-card">
     <mat-card-header class="centered-header">
-      <mat-card-title class="title">Registration</mat-card-title>
+      <mat-card-title class="title">Basic information change</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
       <form
-        [formGroup]="registerForm"
+        [formGroup]="userForm"
         (ngSubmit)="onSubmit()"
         class="form-container"
       >
@@ -52,19 +52,6 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-md-6">
-              <mat-form-field class="compact-field">
-                <mat-label>Role</mat-label>
-                <mat-select formControlName="role">
-                  <mat-option *ngFor="let role of roles" [value]="role">
-                    {{ role }}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="f['role'].invalid && f['role'].touched">
-                  Role is required
-                </mat-error>
-              </mat-form-field>
-            </div>
           </div>
 
           <div class="row">
@@ -76,17 +63,6 @@
                   *ngIf="f['username'].invalid && f['username'].touched"
                 >
                   Username is required
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="compact-field">
-                <mat-label>Password</mat-label>
-                <input matInput type="password" formControlName="password" />
-                <mat-error
-                  *ngIf="f['password'].invalid && f['password'].touched"
-                >
-                  Password is required
                 </mat-error>
               </mat-form-field>
             </div>
@@ -173,8 +149,13 @@
             <button mat-raised-button (click)="goToPreviousStep()">
               Previous
             </button>
-            <button mat-raised-button color="primary" type="submit">
-              Register
+            <button
+              [disabled]="userForm.invalid"
+              mat-raised-button
+              color="primary"
+              type="submit"
+            >
+              Save
             </button>
           </div>
         </mat-card-actions>

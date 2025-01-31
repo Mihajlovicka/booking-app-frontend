@@ -1,0 +1,23 @@
+<div class="profile-container">
+  <mat-drawer-container class="drawer-container">
+    <mat-drawer mode="side" opened>
+      <mat-nav-list>
+        <mat-list-item (click)="selectedTab = 'basicInfo'"
+          >Basic User Info</mat-list-item
+        >
+        <mat-list-item (click)="selectedTab = 'changePassword'"
+          >Change Password</mat-list-item
+        >
+      </mat-nav-list>
+    </mat-drawer>
+
+    <mat-drawer-content>
+      <div *ngIf="selectedTab === 'basicInfo'">
+        <app-change-info></app-change-info>
+      </div>
+      <div *ngIf="selectedTab === 'changePassword'">
+        <app-change-password (changeTab)="resetTab()"></app-change-password>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
