@@ -13,11 +13,6 @@ services:
       file: docker-compose.base.yml
       service: kafka
 
-  zookeeper:
-    extends:
-      file: docker-compose.base.yml
-      service: zookeeper
-
   testing-service:
     image: ${IMAGE_NAME}:${SERVICE_NAME}-test
     depends_on:
@@ -36,6 +31,7 @@ services:
 
 volumes:
   db-data:
+  kafka_data:
 
 networks:
   mynet:
