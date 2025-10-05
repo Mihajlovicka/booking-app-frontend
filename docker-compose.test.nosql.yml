@@ -32,6 +32,7 @@ services:
 volumes:
   db-data:
   kafka_data:
+  mongo_data:
 
 networks:
   mynet:
