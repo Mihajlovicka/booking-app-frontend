@@ -25,6 +25,9 @@ services:
     extends:
       file: docker-compose.base.yml
       service: db_nosql
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin
 
   user_service:
     build:

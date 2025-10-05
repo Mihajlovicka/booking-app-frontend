@@ -1,0 +1,38 @@
+services:
+
+  db_nosql:
+    extends:
+      file: docker-compose.base.yml
+      service: db_nosql
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+
+  kafka:
+    extends:
+      file: docker-compose.base.yml
+      service: kafka
+
+  testing-service:
+    image: ${IMAGE_NAME}:${SERVICE_NAME}-test
+    depends_on:
+      db_nosql:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - mynet
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=mongodb://${DB_USER}:${DB_PASSWORD}@db_nosql:27017/${SERVICE_NAME}
+
+
+volumes:
+  db-data:
+  kafka_data:
+
+networks:
+  mynet:
+    driver: bridge
