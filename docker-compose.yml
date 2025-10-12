@@ -60,7 +60,7 @@ services:
       - mynet
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
-      - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=booking-accomodation-service;Uid=root;Pwd=admin;
+      - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=booking-accommodation-service;Uid=root;Pwd=admin;
 
   booking_service:
     build:
