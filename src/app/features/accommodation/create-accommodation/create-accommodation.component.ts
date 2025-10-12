@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
 import { Address, CreateAccommodation, Equipment } from 'src/app/core/model/accommodation';
 import { AccommodationService } from 'src/app/core/services/accommodation.service';
@@ -23,7 +23,8 @@ export class CreateAccommodationComponent implements OnInit {
   public constructor(
     private readonly fb: FormBuilder,
     private readonly accommodationService: AccommodationService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) {}
 
   public ngOnInit(): void {
@@ -96,8 +97,9 @@ export class CreateAccommodationComponent implements OnInit {
     } as CreateAccommodation;
     this.accommodationService.saveAccommodation(accommodation).subscribe({
       next: () => {
-        // Handle successful save if necessary
         console.log('Accommodation saved successfully!');
+
+        this.router.navigate(['/']);
       },
       error: (error) => {
         console.log('Error response:', error.error?.message); // Log the full error response for debugging
