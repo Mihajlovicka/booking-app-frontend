@@ -19,6 +19,7 @@ export const authGuard: CanActivateFn = (
   const requiredRole: UserRole[] = route.data['requiredRole'];
 
   if (role && requiredRole.includes(role as UserRole)) {
+    console.log('User is authorized');
     return true;
   }
 

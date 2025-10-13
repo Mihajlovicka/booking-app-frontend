@@ -4,6 +4,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
 import { CoreModule } from '../core/core.module';
 import { PopupComponent } from './popup/popup.component';
+import { PeriodDialogComponent } from './period-dialog/period-dialog.component';
 
 
 
@@ -11,7 +12,8 @@ import { PopupComponent } from './popup/popup.component';
   declarations: [
     HomePageComponent,
     HeaderComponent,
-    PopupComponent
+    PopupComponent,
+    PeriodDialogComponent
   ],
   imports: [
     CommonModule,

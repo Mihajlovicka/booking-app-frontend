@@ -16,4 +16,5 @@ export const Path = {
   Accommodations: accommodationServiceAPI,
   User: userApi,
   ChangePassword: authServiceAPI + 'change-password',
+  Booking: bookingBaseAPI
 };

@@ -1,0 +1,84 @@
+
+  <mat-drawer-container class="drawer-container"  *ngIf="accommodation">
+    <mat-drawer mode="side" opened>
+      <mat-nav-list>
+        <mat-list-item (click)="selectedTab = 'info'">Info</mat-list-item>
+        <mat-list-item (click)="selectedTab = 'availability'"
+          >Define Availability</mat-list-item
+        >
+      </mat-nav-list>
+    </mat-drawer>
+
+    <mat-drawer-content>
+      <div *ngIf="selectedTab === 'info'">
+        <div class="accommodation-details-container">
+        <mat-card class="details-card">
+          <mat-card-header>
+            <mat-card-title>{{ accommodation.name }}</mat-card-title>
+            <mat-card-subtitle
+              >{{ accommodation.address.city }},
+              {{ accommodation.address.country }}</mat-card-subtitle
+            >
+          </mat-card-header>
+
+          <mat-card-content>
+            <p><strong>Description:</strong> {{ accommodation.description }}</p>
+            <p>
+              <strong>Guests:</strong> {{ accommodation.minNumberOfGuests }} -
+              {{ accommodation.maxNumberOfGuests }}
+            </p>
+            <p>
+              <strong>Equipment:</strong>
+              <span *ngIf="accommodation.equipments?.length; else noEquipment">
+                <span
+                  *ngFor="let item of accommodation.equipments; let last = last"
+                >
+                  {{ item.name }}<span *ngIf="!last">, </span>
+                </span>
+              </span>
+              <ng-template #noEquipment>None</ng-template>
+            </p>
+
+            <div *ngIf="accommodation.pictures?.length === 0">
+              <p> No pictures available.</p>
+            </div>
+            <div class="carousel-container" *ngIf="accommodation.pictures?.length">
+              <button
+                *ngIf="currentImageIndex > 0"
+                (click)="prevImage()"
+                class="carousel-button prev-button-carousel"
+              >
+                <mat-icon>arrow_back</mat-icon>
+              </button>
+
+              <div class="carousel-images">
+                <img
+                  [src]="accommodation.pictures[currentImageIndex]"
+                  alt="Accommodation image"
+                  class="carousel-img"
+                />
+              </div>
+
+              <button
+                *ngIf="currentImageIndex < accommodation.pictures.length - 1"
+                (click)="nextImage()"
+                class="carousel-button next-button-carousel"
+              >
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        </div>
+      </div>
+    </mat-drawer-content>
+    <mat-drawer-content>
+      <div *ngIf="selectedTab === 'availability'">
+        <app-availability-accommodation
+          [accommodationId]="accommodation.id"
+          [priceTypeSelected]="accommodation.priceType"
+          (updatePriceType)="onPriceTypeUpdate($event)"
+        ></app-availability-accommodation>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
