@@ -1,0 +1,18 @@
+<mat-card class="availability-card">
+  <h2>Set Availability & Price</h2>
+
+  <div class="form-row">
+    <mat-form-field class="form-field">
+      <mat-label>Price Type</mat-label>
+      <mat-select [(value)]="priceTypeSelected" (selectionChange)="onPriceTypeChange()">
+        <mat-option *ngFor="let priceType of priceTypes" [value]="priceType.value">
+          {{ priceType.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div class="calendar-container">
+    <full-calendar [options]="calendarOptions"></full-calendar>
+  </div>
+</mat-card>

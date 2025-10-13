@@ -30,4 +30,12 @@ export class HeaderComponent {
   register() {
     this.router.navigate(['/auth/register']);
   }
+
+  profile() {
+    this.router.navigate(['/profile']);
+  }
+
+  accommodation() {
+    this.router.navigate(['/accommodations']);
+  }
 }

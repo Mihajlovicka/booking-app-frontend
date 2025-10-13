@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
@@ -11,6 +11,7 @@ import { AccommodationService } from 'src/app/core/services/accommodation.servic
   styleUrls: ['./create-accommodation.component.css']
 })
 export class CreateAccommodationComponent implements OnInit {
+  @Output() changeTab = new EventEmitter<any>();
   accommodationForm!: FormGroup;
   currentStep = 1;
   previewUrls: (string | ArrayBuffer)[] = [];
@@ -99,7 +100,7 @@ export class CreateAccommodationComponent implements OnInit {
       next: () => {
         console.log('Accommodation saved successfully!');
 
-        this.router.navigate(['/']);
+        this.changeTab.next('all')
       },
       error: (error) => {
         console.log('Error response:', error.error?.message); // Log the full error response for debugging

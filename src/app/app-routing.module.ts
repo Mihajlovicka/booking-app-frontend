@@ -17,9 +17,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/user/user.module').then((m) => m.UserModule),
   },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile',
+    component: ProfileComponent,
+    canActivate: [authGuard],
+    data: { requiredRole: [UserRole.GUEST, UserRole.HOST] }
+   },
   {
     path: 'accommodations',
+    canActivate: [authGuard],
+    data: { requiredRole: [UserRole.GUEST, UserRole.HOST] },
     loadChildren: () =>
       import('./features/accommodation/accommodation.module').then(
         (m) => m.AccommodationModule

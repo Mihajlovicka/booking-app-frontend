@@ -1,2 +1,41 @@
-<p>accommodations-list works!</p>
-<button (click)="goToCreateNew()"><h1>+</h1></button>
+<div class="accommodation-list-container">
+    <mat-drawer-container class="drawer-container menu">
+    <mat-drawer mode="side" opened>
+      <mat-nav-list>
+        <mat-list-item (click)="selectedTab = 'all'"
+          >All Accommodations</mat-list-item
+        >
+        <mat-list-item (click)="selectedTab = 'create'"
+          >Create New Accommodation</mat-list-item
+        >
+      </mat-nav-list>
+    </mat-drawer>
+
+    
+    <mat-drawer-content>
+        <div *ngIf="selectedTab === 'all'" style="width: 100%">
+            <div class="accommodation-grid">
+            <mat-card
+            *ngFor="let accommodation of accommodations"
+            class="accommodation-card"
+            (click)="openDetails(accommodation.id)"
+            >
+            <img
+                mat-card-image
+                [src]="accommodation.pictures[0] || 'assets/noimage.png'"
+                alt="{{ accommodation.name }}"
+                class="accommodation-image"
+            />
+            <mat-card-content>
+                <h3>{{ accommodation.name }}</h3>
+                <p>{{ accommodation.address.city }}, {{ accommodation.address.country }}</p>
+            </mat-card-content>
+            </mat-card>
+        </div>
+        </div>
+        <div *ngIf="selectedTab === 'create'">
+            <app-create-accommodation (changeTab)="changeTab($event)"></app-create-accommodation>
+        </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

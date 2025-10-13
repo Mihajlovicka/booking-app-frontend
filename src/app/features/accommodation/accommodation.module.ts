@@ -3,26 +3,23 @@ import { CommonModule } from '@angular/common';
 import { CoreModule } from 'src/app/core/core.module';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
 import { AccmodationRoutingModule } from './accommodation-routing.module';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms'; // For [(ngModel)] if needed
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { InfoAccommodationComponent } from './info-accommodation/info-accommodation.component';
+import { AccommodationsListComponent } from './accommodations-list/accommodations-list.component';
+import { AvailabilityAccommodationComponent } from './availability-accommodation/availability-accommodation.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
-    CreateAccommodationComponent
+    CreateAccommodationComponent,
+    AccommodationsListComponent,
+    InfoAccommodationComponent,
+    AvailabilityAccommodationComponent
   ],
   imports: [
     CommonModule,
     CoreModule,
-    AccmodationRoutingModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatCheckboxModule
+    AccmodationRoutingModule  ,
+    FullCalendarModule
   ]
 })
 export class AccommodationModule { }

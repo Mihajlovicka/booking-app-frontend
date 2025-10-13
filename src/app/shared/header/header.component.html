@@ -29,6 +29,8 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="profile()">Profile</button>
+    <button mat-menu-item (click)="accommodation()">Accommodations</button>
     <button mat-menu-item (click)="logout()">LogOut</button>
   </mat-menu>
 </mat-toolbar>
