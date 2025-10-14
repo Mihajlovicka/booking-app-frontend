@@ -28,6 +28,10 @@ export class AccommodationService {
     return this.http.get<Accommodation>(`${Path.Accommodations}/${id}`);
   }
 
+  public getByIdInfo(id: string): Observable<Accommodation> {
+    return this.http.get<Accommodation>(`${Path.Accommodations}/${id}/info`);
+  }
+
   public updatePriceType(accommodationId: string, priceType: PriceType): Observable<void> {
     return this.http.patch<void>(`${Path.Accommodations}/${accommodationId}/price-type`, { priceType });
   }

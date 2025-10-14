@@ -1,0 +1,25 @@
+<div class="centered-container">
+  <mat-card class="main-card">
+    <mat-card-header class="centered-header">
+            <mat-card-title class="title">How many guests will stay at accommodation in selected period ?</mat-card-title>
+    </mat-card-header>
+
+    <div class="sub-card">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field class="compact-field">
+            <mat-label>Number of Guests</mat-label>
+            <input matInput type="number" step="0.5" [(ngModel)]="guestNum" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-buttons">
+      <div>
+        <button mat-stroked-button (click)="onCancel()">Cancel</button>
+        <button mat-flat-button color="primary" (click)="onSave()">Save</button>
+      </div>
+    </div>
+  </mat-card>
+</div>

@@ -14,6 +14,10 @@ export class HeaderComponent {
     return this.userService.isLoggedIn();
   }
 
+  isUserGuest() {
+    return this.userService.isUserGuest();
+  }
+
   home() {
     this.router.navigate(['']);
   }

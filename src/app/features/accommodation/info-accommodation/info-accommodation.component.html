@@ -3,7 +3,8 @@
     <mat-drawer mode="side" opened>
       <mat-nav-list>
         <mat-list-item (click)="selectedTab = 'info'">Info</mat-list-item>
-        <mat-list-item (click)="selectedTab = 'availability'"
+        <mat-list-item *ngIf="isUserGuest()" (click)="selectedTab = 'book'">Book Accommodation</mat-list-item>
+        <mat-list-item *ngIf="!isUserGuest()" (click)="selectedTab = 'availability'"
           >Define Availability</mat-list-item
         >
       </mat-nav-list>
@@ -79,6 +80,10 @@
           [priceTypeSelected]="accommodation.priceType"
           (updatePriceType)="onPriceTypeUpdate($event)"
         ></app-availability-accommodation>
+      </div>
+      <div *ngIf="selectedTab === 'book'">
+        <app-book-accommodation [accommodationId]="accommodation.id" [priceType]="accommodation.priceType" (reservationSaved)="onReservationSaved()"
+        ></app-book-accommodation>
       </div>
     </mat-drawer-content>
   </mat-drawer-container>

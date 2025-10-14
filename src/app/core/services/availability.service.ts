@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Path } from '../constant/path.enum';
@@ -10,22 +10,30 @@ import { AvailabilityFilter } from '../model/availability-filter';
   providedIn: 'root'
 })
 export class AvailabilityService {
-
-  constructor(private http: HttpClient) {}
+  public constructor(private http: HttpClient) { }
 
   search(filter? : AvailabilityFilter): Observable<Accommodation[]> {
     return this.http.post<Accommodation[]>(`${Path.Booking}accommodations/search`, filter);
   }
 
-  getPeriods(accommodationId: string): Observable<AvailabilityPeriod[]> {
-    return this.http.get<AvailabilityPeriod[]>(`${Path.Booking}accommodations/${accommodationId}/availability`);
+  public getPeriods(accommodationId: string, fromToday?: boolean): Observable<AvailabilityPeriod[]> {
+    let params = new HttpParams();
+
+    if (fromToday !== undefined) {
+      params = params.set('fromToday', fromToday);
+    }
+
+    return this.http.get<AvailabilityPeriod[]>(
+      `${Path.Booking}accommodations/${accommodationId}/availability`,
+      { params }
+    );
   }
 
-  addPeriod(accommodationId: string, dto: AvailabilityPeriod): Observable<AvailabilityPeriod> {
+  public addPeriod(accommodationId: string, dto: AvailabilityPeriod): Observable<AvailabilityPeriod> {
     return this.http.post<AvailabilityPeriod>(`${Path.Booking}accommodations/${accommodationId}/availability`, dto);
   }
 
-  deletePeriod(accommodationId: string, periodId: number): Observable<void> {
+  public deletePeriod(accommodationId: string, periodId: number): Observable<void> {
     return this.http.delete<void>(`${Path.Booking}accommodations/${accommodationId}/availability/${periodId}`);
   }
 }

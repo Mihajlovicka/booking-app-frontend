@@ -7,13 +7,17 @@ import { InfoAccommodationComponent } from './info-accommodation/info-accommodat
 import { AccommodationsListComponent } from './accommodations-list/accommodations-list.component';
 import { AvailabilityAccommodationComponent } from './availability-accommodation/availability-accommodation.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { BookAccommodationComponent } from './book-accommodation/book-accommodation.component';
+import { RequestReservationDialogComponent } from './book-accommodation/request-reservation-dialog/request-reservation-dialog.component';
 
 @NgModule({
   declarations: [
     CreateAccommodationComponent,
     AccommodationsListComponent,
     InfoAccommodationComponent,
-    AvailabilityAccommodationComponent
+    AvailabilityAccommodationComponent,
+    BookAccommodationComponent,
+    RequestReservationDialogComponent
   ],
   imports: [
     CommonModule,
