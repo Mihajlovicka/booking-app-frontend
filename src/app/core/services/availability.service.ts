@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Path } from '../constant/path.enum';
 import { Accommodation, CreateAccommodation, Equipment } from '../model/accommodation';
 import { AvailabilityPeriod } from '../model/availability-period';
+import { AvailabilityFilter } from '../model/availability-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,10 @@ import { AvailabilityPeriod } from '../model/availability-period';
 export class AvailabilityService {
 
   constructor(private http: HttpClient) {}
+
+  search(filter? : AvailabilityFilter): Observable<Accommodation[]> {
+    return this.http.post<Accommodation[]>(`${Path.Booking}accommodations/search`, filter);
+  }
 
   getPeriods(accommodationId: string): Observable<AvailabilityPeriod[]> {
     return this.http.get<AvailabilityPeriod[]>(`${Path.Booking}accommodations/${accommodationId}/availability`);

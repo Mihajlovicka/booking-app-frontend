@@ -1,0 +1,66 @@
+.guest-accommodation-list {
+  padding: 2rem;
+  font-family: Garamond, serif;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.accommodation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.accommodation-card {
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.accommodation-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.accommodation-image {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+mat-card-content {
+  text-align: center;
+}
+
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Align the login button to the right */
+  margin-top: 10px;
+}
+
+mat-card-title,
+mat-form-field,
+input,
+textarea,
+mat-label,
+mat-error {
+  font-family: Garamond, serif;
+}
