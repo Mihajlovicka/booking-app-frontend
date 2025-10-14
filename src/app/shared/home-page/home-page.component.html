@@ -1,1 +1,46 @@
-<p>home-page works!</p>
+<div class="guest-accommodation-list">
+  <h2 class="title">Accommodations</h2>
+
+  <form [formGroup]="filterForm" (ngSubmit)="applyFilter()" class="filter-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Start Date</mat-label>
+      <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>End Date</mat-label>
+      <input matInput [matDatepicker]="endPicker" formControlName="endDate">
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+      <input matInput type="text" formControlName="address">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Guests</mat-label>
+      <input matInput type="number" min="1" formControlName="numberOfGuests">
+    </mat-form-field>
+
+    
+    <button mat-raised-button color="primary" type="submit" class="button-container">Search</button>
+    <button mat-stroked-button  type="button" class="button-container" (click)="resetFilter()">Reset</button>
+  </form>
+
+
+  <div class="accommodation-grid">
+    <mat-card *ngFor="let accommodation of accommodations" class="accommodation-card"
+      (click)="openDetails(accommodation.id)">
+      <img mat-card-image [src]="accommodation.pictures?.length ? accommodation.pictures[0] : 'assets/noimage.png'"
+        alt="{{ accommodation.name }}" class="accommodation-image" />
+      <mat-card-content>
+        <h3>{{ accommodation.name }}</h3>
+        <p>{{ accommodation.address.city }}, {{ accommodation.address.country }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
