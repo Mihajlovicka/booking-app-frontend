@@ -13,7 +13,7 @@ import { UserService } from 'src/app/core/services/user.service';
 export class InfoAccommodationComponent {
   accommodation: Accommodation | null = null;
   currentImageIndex = 0;
-  selectedTab: 'info' | 'edit' | 'availability' | 'book' = 'info';
+  selectedTab: 'info' | 'edit' | 'availability' | 'book' | 'reservationRequests' = 'info';
 
   public constructor(
     private route: ActivatedRoute,

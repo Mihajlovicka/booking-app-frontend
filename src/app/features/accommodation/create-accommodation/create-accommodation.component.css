@@ -239,3 +239,8 @@ mat-error {
 .delete-image-btn mat-icon {
   font-size: 20px; /* Ensure the icon fits well inside the circle */
 }
+
+mat-slide-toggle {
+  color: rgba(0, 0, 0, 0.87); /* standardna Material boja teksta */
+  font-weight: 500;
+}

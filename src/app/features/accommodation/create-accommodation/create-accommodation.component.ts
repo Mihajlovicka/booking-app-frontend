@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
 import { Address, CreateAccommodation, Equipment } from 'src/app/core/model/accommodation';
 import { AccommodationService } from 'src/app/core/services/accommodation.service';
@@ -23,9 +22,7 @@ export class CreateAccommodationComponent implements OnInit {
 
   public constructor(
     private readonly fb: FormBuilder,
-    private readonly accommodationService: AccommodationService,
-    private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly accommodationService: AccommodationService
   ) {}
 
   public ngOnInit(): void {
@@ -42,7 +39,8 @@ export class CreateAccommodationComponent implements OnInit {
       streetName: ['', [Validators.required, Validators.maxLength(100)]],
       city: ['', [Validators.required, Validators.maxLength(100)]],
       postNumber: ['', [Validators.required, Validators.maxLength(100)]],
-      country: ['', [Validators.required, Validators.maxLength(100)]]
+      country: ['', [Validators.required, Validators.maxLength(100)]],
+      automaticReservation: [false]
     });
   }
 
@@ -94,7 +92,8 @@ export class CreateAccommodationComponent implements OnInit {
         country: this.accommodationForm.value.country,
         postNumber: this.accommodationForm.value.postNumber
       } as Address,
-      pictureUrls: this.accommodationForm.value.pictures
+      pictureUrls: this.accommodationForm.value.pictures,
+      automaticReservation: this.accommodationForm.value.automaticReservation
     } as CreateAccommodation;
     this.accommodationService.saveAccommodation(accommodation).subscribe({
       next: () => {
@@ -103,14 +102,11 @@ export class CreateAccommodationComponent implements OnInit {
         this.changeTab.next('all')
       },
       error: (error) => {
-        console.log('Error response:', error.error?.message); // Log the full error response for debugging
-        // Check if the error is related to name uniqueness
+        console.log('Error response:', error.error?.message);
         if (error.status === 500 && error.error?.message === 'Accommodation name must be unique') {
-          // Reset the form and set the current step back to 1
-          alert(error.error?.message); // Optionally show an alert with the error message
-          this.currentStep = 1;  // Go back to step 1
+          alert(error.error?.message);
+          this.currentStep = 1;
         } else {
-          // Handle other errors
           console.error('An unexpected error occurred:', error);
         }
       }

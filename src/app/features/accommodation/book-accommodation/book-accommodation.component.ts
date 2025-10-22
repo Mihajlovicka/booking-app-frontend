@@ -31,31 +31,73 @@ export class BookAccommodationComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-  if (!this.accommodationId) return;
+    if (!this.accommodationId) return;
 
-  forkJoin({
-    reservations: this.reservationService.getReservationsByAccommodation(this.accommodationId).pipe(take(1)),
-    periods: this.availabilityService.getPeriods(this.accommodationId, true)
-  }).subscribe(({ reservations, periods }) => {
-    this.reservations = reservations;
+    forkJoin({
+      reservations: this.reservationService.getReservationsByAccommodation(this.accommodationId).pipe(take(1)),
+      periods: this.availabilityService.getPeriods(this.accommodationId, true)
+    }).subscribe(({ reservations, periods }) => {
+      this.reservations = reservations;
 
-    this.availablePeriods = periods.filter(period => {
-      return !this.reservations.some(reservation => {
-        return !(period.endDate < reservation.startDate || period.startDate > reservation.endDate);
+      this.availablePeriods = periods.filter(period => {
+        return !this.reservations.some(reservation => {
+          return !(period.endDate < reservation.startDate || period.startDate > reservation.endDate);
+        });
       });
-    });
 
-    this.calendarOptions.events = this.availablePeriods.map(p => ({
-      title: `$${p.price}-${this.priceType}`,
-      id: p.id?.toString(),
-      start: p.startDate,
-      end: p.endDate,
-      allDay: true,
-      display: 'background',
-      backgroundColor: '#16a34a'
-    }));
-  });
-}
+      this.availablePeriods = [];
+
+      for (const p of periods) {
+        let freeSegments: AvailabilityPeriod[] = [{
+          ...p,
+          startDate: p.startDate,
+          endDate: p.endDate
+        }];
+
+        for (const r of reservations) {
+          freeSegments = freeSegments.flatMap(segment => {
+            if (segment.endDate <= r.startDate || segment.startDate >= r.endDate) {
+              return [segment];
+            }
+
+            const newSegments: AvailabilityPeriod[] = [];
+
+            // deo pre rezervacije
+            if (segment.startDate < r.startDate) {
+              newSegments.push({
+                ...segment,
+                startDate: segment.startDate,
+                endDate: r.startDate
+              });
+            }
+
+            if (segment.endDate > r.endDate) {
+              newSegments.push({
+                ...segment,
+                startDate: r.endDate,
+                endDate: segment.endDate
+              });
+            }
+
+            return newSegments;
+          });
+        }
+
+        this.availablePeriods.push(...freeSegments);
+      }
+
+
+      this.calendarOptions.events = this.availablePeriods.map(p => ({
+        title: `$${p.price}-${this.priceType}`,
+        id: p.id?.toString(),
+        start: p.startDate,
+        end: p.endDate,
+        allDay: true,
+        display: 'background',
+        backgroundColor: '#16a34a'
+      }));
+    });
+  }
 
   public calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin, multiMonthPlugin],
