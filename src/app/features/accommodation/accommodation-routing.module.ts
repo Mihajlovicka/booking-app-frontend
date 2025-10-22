@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CreateAccommodationComponent } from "./create-accommodation/create-accommodation.component";
 import { AccommodationsListComponent } from "./accommodations-list/accommodations-list.component";
 import { InfoAccommodationComponent } from "./info-accommodation/info-accommodation.component";
 

@@ -9,6 +9,7 @@ import {
 import { Path } from '../constant/path.enum';
 import { Observable, tap } from 'rxjs';
 import { ChangePassword } from '../model/change-password';
+import { UserRole } from '../model/user-role';
 
 @Injectable()
 export class UserService {
@@ -49,6 +50,10 @@ export class UserService {
 
   isLoggedIn(): boolean {
     return this.getToken() !== null;
+  }
+
+  isUserGuest(): boolean {
+    return this.getRole() === UserRole.GUEST;
   }
 
   logout(): void {

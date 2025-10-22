@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AvailabilityPeriod, PriceType, priceTypes } from 'src/app/core/model/availability-period';
-
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import {
@@ -18,8 +16,7 @@ import { PeriodDialogComponent } from 'src/app/shared/period-dialog/period-dialo
 
 @Component({
   selector: 'app-availability-accommodation',
-  templateUrl: './availability-accommodation.component.html',
-  styleUrls: ['./availability-accommodation.component.css'],
+  templateUrl: './availability-accommodation.component.html'
 })
 export class AvailabilityAccommodationComponent {
   @Input() accommodationId!: string;
@@ -30,13 +27,16 @@ export class AvailabilityAccommodationComponent {
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin, multiMonthPlugin],
     initialView: 'dayGridMonth',
-    selectable: true, 
-    editable: true, 
+    selectable: true,
+    editable: false,
     weekends: true,
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,multiMonthYear',
+    },
+    validRange: {
+      start: new Date().toISOString().split('T')[0]
     },
     views: {
       multiMonthYear: {
@@ -44,15 +44,16 @@ export class AvailabilityAccommodationComponent {
         duration: { months: 12 },
       },
     },
-    events: [{ title: 'Meeting', start: new Date() }],
-    select: this.handleDateSelect.bind(this), 
+    events: [],
+    select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
   };
+
 
   periods: AvailabilityPeriod[] = [];
   events: any[] = [];
 
-  constructor(private availabilityService: AvailabilityService, 
+  constructor(private availabilityService: AvailabilityService,
     private readonly accommodationService: AccommodationService,
     private popupHandler: PopupHandlerService,
     private dialog: MatDialog
@@ -82,75 +83,85 @@ export class AvailabilityAccommodationComponent {
       });
   }
 
-handleDateSelect(selectInfo: DateSelectArg) {
-  const dialogRef = this.dialog.open(PeriodDialogComponent, {
-    width: '400px',
-    data: {
-      startDate: selectInfo.startStr,
-      endDate: selectInfo.endStr,
-      price: 0
-    } as AvailabilityPeriod
-  });
+  handleDateSelect(selectInfo: DateSelectArg) {
+    const dialogRef = this.dialog.open(PeriodDialogComponent, {
+      width: '400px',
+      data: {
+        startDate: selectInfo.startStr,
+        endDate: selectInfo.endStr,
+        price: 0
+      } as AvailabilityPeriod
+    });
 
-  dialogRef.afterClosed().subscribe(result => {
-    if (!result || result.action !== 'save') return;
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result || result.action !== 'save') return;
 
-    const dto = {
-      startDate: selectInfo.startStr,
-      endDate: selectInfo.endStr,
-      price: result.price
-    };
-
-    this.availabilityService
-      .addPeriod(this.accommodationId, dto)
-      .subscribe(() => this.loadPeriods());
-  });
-}
-
-// For clicking an existing period
-handleEventClick(clickInfo: EventClickArg) {
-  const period = this.periods.find(p => p.id?.toString() === clickInfo.event.id);
-  if (!period) return;
-
-  const dialogRef = this.dialog.open(PeriodDialogComponent, {
-    width: '400px',
-    data: {
-      startDate: period.startDate,
-      endDate: period.endDate,
-      price: period.price,
-      id: period.id
-  } as AvailabilityPeriod });
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (!result) return;
-
-    if (result.action === 'save') {
       const dto = {
-        startDate: period.startDate,
-        endDate: period.endDate,
-        price: result.price,
-        id: period.id
+        startDate: selectInfo.startStr,
+        endDate: selectInfo.endStr,
+        price: result.price
       };
+
       this.availabilityService
         .addPeriod(this.accommodationId, dto)
         .subscribe(() => this.loadPeriods());
+    });
+  }
 
-    } else if (result.action === 'delete') {
-      this.availabilityService
-        .deletePeriod(this.accommodationId, period.id!)
-        .subscribe(() => this.loadPeriods());
+  // For clicking an existing period
+  handleEventClick(clickInfo: EventClickArg) {
+    const eventStart = new Date(clickInfo.event.startStr);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (eventStart < today) {
+      this.popupHandler.openSnackbar('Cannot edit past periods', 'error');
+      return;
     }
-  });
-}
+
+    const period = this.periods.find(p => p.id?.toString() === clickInfo.event.id);
+    if (!period) return;
+
+    const dialogRef = this.dialog.open(PeriodDialogComponent, {
+      width: '400px',
+      data: {
+        startDate: period.startDate,
+        endDate: period.endDate,
+        price: period.price,
+        id: period.id
+      } as AvailabilityPeriod
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
+
+      if (result.action === 'save') {
+        const dto = {
+          startDate: period.startDate,
+          endDate: period.endDate,
+          price: result.price,
+          id: period.id
+        };
+        this.availabilityService
+          .addPeriod(this.accommodationId, dto)
+          .subscribe(() => this.loadPeriods());
+
+      } else if (result.action === 'delete') {
+        this.availabilityService
+          .deletePeriod(this.accommodationId, period.id!)
+          .subscribe(() => this.loadPeriods());
+      }
+    });
+  }
 
   onPriceTypeChange() {
     this.accommodationService.updatePriceType(this.accommodationId, this.priceTypeSelected).subscribe({
       next: () => {
-      this.popupHandler.openSnackbar(
-        'Price type changed successfully',
-        'success'
-      );
-      this.priceTypeChange.emit(this.priceTypeSelected);
+        this.popupHandler.openSnackbar(
+          'Price type changed successfully',
+          'success'
+        );
+        this.priceTypeChange.emit(this.priceTypeSelected);
       },
     });
   }
