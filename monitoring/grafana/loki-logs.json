@@ -1,0 +1,138 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "af1flawtckzcwe"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 31,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "uid": "af1flawtckzcwe"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "dedupStrategy": "none",
+        "enableInfiniteScrolling": false,
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": [
+          "service_name",
+          "level",
+          "http_method",
+          "http_status"
+        ],
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "uid": "af1flawtckzcwe"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "{service_name=~\"$service\"} != \"Microsoft\" != \"System\" \r\n",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Recent Logs (API calls & errors)",
+      "type": "logs"
+    }
+  ],
+  "preload": false,
+  "refresh": "30s",
+  "schemaVersion": 42,
+  "tags": [
+    "logs",
+    "microservices",
+    "api",
+    "errors"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": ".+",
+        "current": {
+          "text": "user_service",
+          "value": "user_service"
+        },
+        "datasource": {
+          "uid": "af1flawtckzcwe"
+        },
+        "definition": "",
+        "includeAll": true,
+        "label": "Service",
+        "name": "service",
+        "options": [
+          {
+            "selected": false,
+            "text": "accommodation_service",
+            "value": "accommodation_service"
+          },
+          {
+            "selected": false,
+            "text": "booking_service",
+            "value": "booking_service"
+          },
+          {
+            "selected": false,
+            "text": "notification_service",
+            "value": "notification_service"
+          },
+          {
+            "selected": true,
+            "text": "user_service",
+            "value": "user_service"
+          }
+        ],
+        "query": {
+          "label": "service_name",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "",
+          "type": 1
+        },
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Microservices Logs – API & Errors",
+  "uid": "microservices-logs",
+  "version": 31
+}

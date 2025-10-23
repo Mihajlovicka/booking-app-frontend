@@ -39,11 +39,14 @@ services:
       kafka:
         condition: service_healthy
     networks:
-      - mynet
+      mynet:
     ports:
       - "5002:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
+      - SERVICE_NAME=user_service
+      - OTEL_COLLECTOR=http://otel-collector:4317
+      - LOKI=http://loki:3100
       - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=booking-user-service;Uid=root;Pwd=admin;
 
 
@@ -60,6 +63,9 @@ services:
       - mynet
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
+      - SERVICE_NAME=accommodation_service
+      - OTEL_COLLECTOR=http://otel-collector:4317
+      - LOKI=http://loki:3100
       - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=booking-accommodation-service;Uid=root;Pwd=admin;
 
   booking_service:
@@ -75,6 +81,9 @@ services:
       - mynet
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
+      - SERVICE_NAME=booking_service
+      - OTEL_COLLECTOR=http://otel-collector:4317
+      - LOKI=http://loki:3100
       - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=booking-booking-service;Uid=root;Pwd=admin;
 
   notification_service:
@@ -90,6 +99,9 @@ services:
       - mynet
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
+      - SERVICE_NAME=notification_service
+      - OTEL_COLLECTOR=http://otel-collector:4317
+      - LOKI=http://loki:3100
       - ConnectionStrings__DefaultConnection=mongodb://root:admin@db_nosql:27017/booking-notification-service
 
   booking_front:
@@ -114,3 +126,4 @@ volumes:
 networks:
   mynet:
     driver: bridge
+    name: mynet

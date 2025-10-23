@@ -1,0 +1,517 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Windows Exporter dashboard for CPU, Memory, Disk, Network, OS, Service, System (Adjusted)",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": 20,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "uid": "ff1g68f2ql24gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "expr": "100 - (avg by(instance) (irate(windows_cpu_time_total{mode='idle', instance=~\"$server\"}[$interval])) * 100)",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Usage (%)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "uid": "ff1g68f2ql24gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "expr": "windows_memory_physical_bytes{instance=~\"$server\"} - windows_memory_available_bytes{instance=~\"$server\"}",
+          "legendFormat": "Used Memory",
+          "refId": "B"
+        },
+        {
+          "expr": "windows_memory_available_bytes{instance=~\"$server\"}",
+          "legendFormat": "Available Memory",
+          "refId": "C"
+        }
+      ],
+      "title": "Physical Memory",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "uid": "ff1g68f2ql24gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "C: Used (%)"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": true,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 6
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "(\r\n  windows_logical_disk_size_bytes{instance=~\"$server\", volume=\"C:\"} \r\n  - windows_logical_disk_free_bytes{instance=~\"$server\", volume=\"C:\"}\r\n) / windows_logical_disk_size_bytes{instance=~\"$server\", volume=\"C:\"} * 100\r\n",
+          "legendFormat": "{{volume}} Used (%)",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "title": "Logical Disk Used (%)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "uid": "ff1g68f2ql24gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes/sec"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 6
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "expr": "irate(windows_net_bytes_received_total{instance=~\"$server\"}[$interval])",
+          "legendFormat": "{{instance}} Receive (Bps)",
+          "refId": "E"
+        },
+        {
+          "expr": "irate(windows_net_bytes_sent_total{instance=~\"$server\"}[$interval])",
+          "legendFormat": "{{instance}} Transmit (Bps)",
+          "refId": "F"
+        }
+      ],
+      "title": "Network Traffic (Bps)",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "refresh": "10s",
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "host.docker.internal:9115",
+          "value": "host.docker.internal:9115"
+        },
+        "datasource": {
+          "uid": "ff1g68f2ql24gd"
+        },
+        "definition": "label_values(windows_cpu_time_total, instance)",
+        "includeAll": false,
+        "label": "Server",
+        "name": "server",
+        "options": [],
+        "query": "label_values(windows_cpu_time_total, instance)",
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "auto": true,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "text": "5m",
+          "value": "5m"
+        },
+        "label": "Rate Interval",
+        "name": "interval",
+        "options": [
+          {
+            "selected": true,
+            "text": "5m",
+            "value": "5m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          }
+        ],
+        "query": "5m,10m,30m,1h,6h,12h,1d",
+        "refresh": 2,
+        "type": "interval"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Windows Exporter Core Metrics",
+  "uid": "adlf8dk",
+  "version": 2
+}

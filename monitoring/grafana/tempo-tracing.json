@@ -1,0 +1,153 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 35,
+  "links": [],
+  "panels": [
+    {
+      "datasource": "Tempo",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "columns": [
+          {
+            "text": "Trace ID",
+            "value": "traceID"
+          },
+          {
+            "text": "Service",
+            "value": "serviceName"
+          },
+          {
+            "text": "Operation",
+            "value": "operationName"
+          },
+          {
+            "text": "Duration (ms)",
+            "value": "duration"
+          },
+          {
+            "text": "Status Code",
+            "value": "statusCode"
+          }
+        ],
+        "showHeader": true
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "filters": [
+            {
+              "id": "e95dfb91",
+              "operator": "=",
+              "scope": "resource",
+              "value": []
+            },
+            {
+              "id": "service-name",
+              "isCustomValue": false,
+              "operator": "=",
+              "scope": "resource",
+              "tag": "service.name",
+              "value": [],
+              "valueType": "string"
+            },
+            {
+              "id": "duration-type",
+              "value": "span"
+            },
+            {
+              "id": "min-duration",
+              "operator": ">",
+              "tag": "duration",
+              "value": "10ms",
+              "valueType": "duration"
+            }
+          ],
+          "limit": 40,
+          "metricsQueryType": "range",
+          "query": "{}",
+          "queryType": "traceqlSearch",
+          "refId": "A",
+          "serviceMapUseNativeHistograms": false,
+          "spss": 3,
+          "tableType": "traces"
+        }
+      ],
+      "title": "All Traces",
+      "type": "table"
+    }
+  ],
+  "preload": false,
+  "refresh": "5s",
+  "schemaVersion": 42,
+  "tags": [
+    "tempo",
+    "tracing",
+    "otel"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "OpenTelemetry Tracing Dashboard",
+  "uid": "otel-tracing-dashboard",
+  "version": 26
+}

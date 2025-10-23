@@ -1,0 +1,100 @@
+services:
+  otel-collector:
+    # image: otel/opentelemetry-collector-contrib:latest
+    image: otel/opentelemetry-collector:latest
+
+    container_name: otel-collector
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./monitoring/otel-collector-config.yaml:/etc/otel-collector-config.yaml:ro
+    ports:
+      - "4317:4317"
+      - "8889:8889"
+    networks:
+      - mynet
+
+  #tracing
+  tempo:
+    image: grafana/tempo:latest
+    container_name: tempo
+    volumes:
+      - ./monitoring/tempo.yml:/etc/tempo.yml:ro
+      - tempo-data:/var/tempo
+    command: ["-config.file=/etc/tempo.yml"]
+    ports:
+      - "3200:3200"
+    networks:
+      - mynet
+
+  #logs
+  loki:
+    image: grafana/loki:3.0.0
+    container_name: loki
+    command: ["-config.file=/etc/loki/loki-config.yaml",  "-config.expand-env=true"]
+    volumes:
+      - ./monitoring/loki-config.yaml:/etc/loki/loki-config.yaml:ro
+      - loki-data:/loki
+    ports:
+      - "3100:3100"
+    networks:
+      - mynet
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    privileged: true
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - mynet
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - mynet
+    depends_on:
+      - cadvisor
+      - user_service
+      - booking_service
+      - accommodation_service
+      - notification_service
+
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    depends_on:
+      - tempo
+      - loki
+    environment:
+      GF_SECURITY_ADMIN_USER: "admin"
+      GF_SECURITY_ADMIN_PASSWORD: "admin"
+    ports:
+      - "3000:3000"
+    networks:
+      - mynet
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+volumes:
+  tempo-data:
+  grafana-data:
+  loki-data:
+  prometheus-data:
+
+networks:
+  mynet:
+    external: true
+    name: mynet
