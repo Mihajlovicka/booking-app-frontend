@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { ViewMyReservationRequestsComponent } from './view-my-reservation-requests/view-my-reservation-requests.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MatButtonModule } from '@angular/material/button';
     AvailabilityAccommodationComponent,
     BookAccommodationComponent,
     RequestReservationDialogComponent,
-    ViewReservationRequestsComponent
+    ViewReservationRequestsComponent,
+    ViewMyReservationRequestsComponent
   ],
   imports: [
     CommonModule,

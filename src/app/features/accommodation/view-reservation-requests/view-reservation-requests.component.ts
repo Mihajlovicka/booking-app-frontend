@@ -29,7 +29,7 @@ export class ViewReservationRequestsComponent implements OnInit {
   ) { }
 
   public reject(requestionExternalId: string): void {
-    this.reservationService.reject(this.accommodation.id, requestionExternalId)
+    this.reservationService.reject(requestionExternalId)
       .pipe(
         switchMap(_ => {
           this.reservationService.getAllReservationRequestsForAccommodation(this.accommodation.id)
@@ -46,7 +46,7 @@ export class ViewReservationRequestsComponent implements OnInit {
   }
 
   public accept(requestionExternalId: string): void {
-    this.reservationService.accept(this.accommodation.id, requestionExternalId)
+    this.reservationService.accept(requestionExternalId)
       .pipe(
         switchMap(_ => {
           this.reservationService.getAllReservationRequestsForAccommodation(this.accommodation.id)

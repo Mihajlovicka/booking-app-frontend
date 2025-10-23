@@ -16,7 +16,7 @@ import { ProfileComponent } from './features/user/profile/profile.component';
     AppComponent,
     ProfileComponent,
     ChangeInfoComponent,
-    ChangePasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

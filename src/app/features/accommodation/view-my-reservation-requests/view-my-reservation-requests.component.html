@@ -1,0 +1,30 @@
+<div class="reservation-requests-container">
+  <h2>Pending Reservation Requests</h2>
+
+  <div class="reservation-requests-grid" *ngIf="reservationRequests?.length; else noRequests">
+    <mat-card
+      *ngFor="let request of reservationRequests"
+      class="reservation-request-card"
+    >
+      <mat-card-header>
+        <mat-card-title> {{ request.accommodationName }} </mat-card-title>
+        <mat-card-subtitle>
+          {{ request.startDate | date: 'mediumDate' }} - {{ request.endDate | date: 'mediumDate' }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><strong>Price:</strong> {{ request.finalPrice }} </p>
+        <p><strong>Guests:</strong> {{ request.guestNumber }}</p>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-stroked-button color="warn" (click)="cancel(request)">Cancel Request</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-template #noRequests>
+    <p class="no-requests">No pending reservation requests.</p>
+  </ng-template>
+</div>
