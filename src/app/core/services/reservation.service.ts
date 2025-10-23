@@ -11,8 +11,8 @@ import { ReservationDto } from '../model/reservation';
 export class ReservationService {
   public constructor(private http: HttpClient) { }
 
-  public createReservationRequest(accommodationId: string, dto: CreateReservationRequest): Observable<void> {
-    return this.http.post<void>(`${Path.Booking}accommodations/${accommodationId}/reservation-requests`, dto);
+  public createReservationRequest(dto: CreateReservationRequest): Observable<void> {
+    return this.http.post<void>(`${Path.Booking}/reservation-requests`, dto);
   }
 
   public getReservationsByAccommodation(accommodationId: string): Observable<ReservationDto[]> {
@@ -23,15 +23,19 @@ export class ReservationService {
 
   public getAllReservationRequestsForAccommodation(accommodationId: string): Observable<ReservationRequest[]>   {
     return this.http.get<ReservationRequest[]>(
-       `${Path.Booking}accommodations/${accommodationId}/reservation-requests`
+       `${Path.Booking}reservation-requests/${accommodationId}`
       );
   }
 
-  public reject(accommodationId: string, reservationRequestId: string): Observable<void> {
-    return this.http.delete<void>(`${Path.Booking}accommodations/${accommodationId}/reservation-requests/${reservationRequestId}`);
+  public reject(reservationRequestId: string): Observable<void> {
+    return this.http.delete<void>(`${Path.Booking}reservation-requests/${reservationRequestId}`);
   }
 
-  public accept(accommodationId: string, reservationRequestId: string): Observable<void> {
-    return this.http.post<void>(`${Path.Booking}accommodations/${accommodationId}/reservation-requests/${reservationRequestId}`,{});
+  public accept(reservationRequestId: string): Observable<void> {
+    return this.http.post<void>(`${Path.Booking}reservation-requests/${reservationRequestId}`,{});
+  }
+
+  public getMyReservationRequests(): Observable<ReservationRequest[]> {
+    return this.http.get<ReservationRequest[]>(`${Path.Booking}reservation-requests`);
   }
 }

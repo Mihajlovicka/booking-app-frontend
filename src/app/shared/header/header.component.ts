@@ -22,6 +22,10 @@ export class HeaderComponent {
     this.router.navigate(['']);
   }
 
+  reservationRequests() {
+    this.router.navigate(['accommodations/reservation-requests']);
+  }
+
   login() {
     this.router.navigate(['/auth/login']);
   }

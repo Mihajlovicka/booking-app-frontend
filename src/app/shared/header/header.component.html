@@ -31,6 +31,7 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="profile()">Profile</button>
     <button mat-menu-item *ngIf="!isUserGuest()" (click)="accommodation()">Accommodations</button>
+    <button mat-menu-item *ngIf="isUserGuest()" (click)="reservationRequests()">Reservation Requests</button>
     <button mat-menu-item (click)="logout()">LogOut</button>
   </mat-menu>
 </mat-toolbar>

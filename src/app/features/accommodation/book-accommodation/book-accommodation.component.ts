@@ -154,7 +154,7 @@ export class BookAccommodationComponent implements OnInit {
         } as CreateReservationRequest;
 
         this.reservationService
-          .createReservationRequest(this.accommodationId!, dto)
+          .createReservationRequest(dto)
           .subscribe(_ => {
             this.reservationSaved.emit();
           });

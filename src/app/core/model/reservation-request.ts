@@ -13,4 +13,5 @@ export interface ReservationRequest {
   externalId: string;
   finalPrice: number;
   guestUsername: string;
+  accommodationName?: string;
 }
