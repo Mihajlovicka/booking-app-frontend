@@ -13,6 +13,7 @@ export interface CreateAccommodation {
   minNumberOfGuests?: number;
   maxNumberOfGuests?: number;
   pictureUrls: string[];
+  automaticReservation: boolean;
 }
 
 export interface Address {

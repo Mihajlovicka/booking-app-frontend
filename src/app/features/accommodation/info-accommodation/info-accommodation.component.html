@@ -7,6 +7,9 @@
         <mat-list-item *ngIf="!isUserGuest()" (click)="selectedTab = 'availability'"
           >Define Availability</mat-list-item
         >
+        <mat-list-item *ngIf="!isUserGuest()" (click)="selectedTab = 'reservationRequests'"
+          >Reservation Requests</mat-list-item
+        >
       </mat-nav-list>
     </mat-drawer>
 
@@ -84,6 +87,9 @@
       <div *ngIf="selectedTab === 'book'">
         <app-book-accommodation [accommodationId]="accommodation.id" [priceType]="accommodation.priceType" (reservationSaved)="onReservationSaved()"
         ></app-book-accommodation>
+      </div>
+      <div *ngIf="selectedTab === 'reservationRequests'">
+        <app-view-reservation-requests [accommodation]="accommodation" />
       </div>
     </mat-drawer-content>
   </mat-drawer-container>

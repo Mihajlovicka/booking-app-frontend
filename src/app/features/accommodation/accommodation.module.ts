@@ -9,6 +9,14 @@ import { AvailabilityAccommodationComponent } from './availability-accommodation
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { BookAccommodationComponent } from './book-accommodation/book-accommodation.component';
 import { RequestReservationDialogComponent } from './book-accommodation/request-reservation-dialog/request-reservation-dialog.component';
+import { ViewReservationRequestsComponent } from './view-reservation-requests/view-reservation-requests.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon'; // već koristiš ikone za upload/delete
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -17,13 +25,21 @@ import { RequestReservationDialogComponent } from './book-accommodation/request-
     InfoAccommodationComponent,
     AvailabilityAccommodationComponent,
     BookAccommodationComponent,
-    RequestReservationDialogComponent
+    RequestReservationDialogComponent,
+    ViewReservationRequestsComponent
   ],
   imports: [
     CommonModule,
     CoreModule,
-    AccmodationRoutingModule  ,
-    FullCalendarModule
+    AccmodationRoutingModule,
+    FullCalendarModule,
+    MatSlideToggleModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule
   ]
 })
 export class AccommodationModule { }

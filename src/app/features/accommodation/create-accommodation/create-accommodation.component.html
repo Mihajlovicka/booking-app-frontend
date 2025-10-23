@@ -49,6 +49,13 @@
           </div>
           <div class="row">
             <div class="col-md-12">
+              <mat-slide-toggle color="primary" formControlName="automaticReservation">
+                Automatic Reservation
+              </mat-slide-toggle>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
               <mat-form-field class="compact-field">
                 <mat-label *ngIf="items.length > 0">Choose equipment</mat-label>
                 <mat-label *ngIf="items.length === 0">Cannot choose equipment</mat-label>
@@ -107,7 +114,7 @@
             <div class="col-md-12">
               <mat-form-field class="compact-field">
                 <mat-label>Country</mat-label>
-                <input matInput formControlName="country"/>
+                <input matInput formControlName="country" />
                 <mat-error *ngIf="f['country'].invalid && f['country'].touched">
                   Country is required
                 </mat-error>
@@ -142,7 +149,8 @@
               </div>
             </div>
 
-            <button *ngIf="currentImageIndex < previewUrls.length - 1" (click)="nextImage()" class="carousel-button next-button-carousel">
+            <button *ngIf="currentImageIndex < previewUrls.length - 1" (click)="nextImage()"
+              class="carousel-button next-button-carousel">
               <mat-icon>arrow_forward</mat-icon>
             </button>
           </div>
@@ -152,10 +160,12 @@
         </div>
 
         <mat-card-actions class="step-buttons">
-          <button mat-raised-button color="accent" *ngIf="currentStep > 1" (click)="prevStep()" type="button" class="prev-button">
+          <button mat-raised-button color="accent" *ngIf="currentStep > 1" (click)="prevStep()" type="button"
+            class="prev-button">
             Previous
           </button>
-          <button mat-raised-button color="primary" *ngIf="currentStep <= 2" (click)="nextStep()" type="button" class="next-button">
+          <button mat-raised-button color="primary" *ngIf="currentStep <= 2" (click)="nextStep()" type="button"
+            class="next-button">
             Next
           </button>
           <button mat-raised-button color="primary" *ngIf="currentStep === 3" (click)="onSubmit()" type="submit">
