@@ -14,4 +14,5 @@ export interface ReservationRequest {
   finalPrice: number;
   guestUsername: string;
   accommodationName?: string;
+  userCancellationNumber: number;
 }
