@@ -1,4 +1,4 @@
-export interface ReservationDto {
+export interface Reservation {
   id: number;
   startDate: string;
   endDate: string;
@@ -6,4 +6,5 @@ export interface ReservationDto {
   guestUsername: string;
   guestNumber: number;
   finalPrice: number;
+  accommodationName?: string;
 }

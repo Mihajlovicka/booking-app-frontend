@@ -13,3 +13,8 @@ COPY --from=build /usr/src/app/dist/front /usr/share/nginx/html
 COPY /nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
+
+RUN apk add --no-cache tzdata \
+    && cp /usr/share/zoneinfo/Europe/Belgrade /etc/localtime \
+    && echo "Europe/Belgrade" > /etc/timezone \
+    && apk del tzdata
