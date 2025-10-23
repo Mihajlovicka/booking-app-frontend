@@ -39,6 +39,10 @@ export class HomePageComponent implements OnInit {
           this.accommodations = data;
         }
       });
+      this.availabilityService.not_found().subscribe({
+        next: () => {
+        }
+      });
     }
 
       applyFilter() {
