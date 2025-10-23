@@ -1,0 +1,63 @@
+.reservation-requests-container {
+  padding: 2rem;
+  font-family: Garamond, serif;
+}
+
+.reservation-requests-container h2 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.reservation-requests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.reservation-request-card {
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 5px;
+}
+
+.reservation-request-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.no-requests {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  color: gray;
+}
+
+.reservation-segments {
+  display: flex;
+  gap: 20px;
+}
+
+.reservation-segment {
+  flex: 1;
+}
+
+.vertical-divider {
+  width: 2px;
+  background-color: #ccc;
+}

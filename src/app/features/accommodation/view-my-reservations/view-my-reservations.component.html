@@ -1,0 +1,48 @@
+<div class="reservation-requests-container">
+  <h2>Reservations</h2>
+
+  <div class="reservation-segments">
+    <!-- Upcoming -->
+    <div class="reservation-segment" *ngIf="upcomingReservations.length">
+      <h3>Upcoming Reservations</h3>
+      <mat-card *ngFor="let reservation of upcomingReservations" class="reservation-request-card">
+        <mat-card-header>
+          <mat-card-title>{{ reservation.accommodationName }}</mat-card-title>
+          <mat-card-subtitle>
+            {{ reservation.startDate | date: 'mediumDate' }} - {{ reservation.endDate | date: 'mediumDate' }}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p><strong>Price:</strong> {{ reservation.finalPrice }}</p>
+          <p><strong>Guests:</strong> {{ reservation.guestNumber }}</p>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+          <button mat-stroked-button color="warn" (click)="cancel(reservation.id)">Cancel Request</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="vertical-divider"></div>
+    <div class="reservation-segment" *ngIf="pastOrOngoingReservations.length">
+      <h3>Ongoing / Past Reservations</h3>
+      <mat-card *ngFor="let reservation of pastOrOngoingReservations" class="reservation-request-card">
+        <mat-card-header>
+          <mat-card-title>{{ reservation.accommodationName }}</mat-card-title>
+          <mat-card-subtitle>
+            {{ reservation.startDate | date: 'mediumDate' }} - {{ reservation.endDate | date: 'mediumDate' }}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p><strong>Price:</strong> {{ reservation.finalPrice }}</p>
+          <p><strong>Guests:</strong> {{ reservation.guestNumber }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <ng-template #noRequests>
+    <p class="no-requests">No reservations found.</p>
+  </ng-template>
+</div>

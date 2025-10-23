@@ -9,7 +9,7 @@ import { RequestReservationDialogComponent } from './request-reservation-dialog/
 import { CreateReservationRequest } from 'src/app/core/model/reservation-request';
 import { MatDialog } from '@angular/material/dialog';
 import { ReservationService } from 'src/app/core/services/reservation.service';
-import { ReservationDto } from 'src/app/core/model/reservation';
+import { Reservation } from 'src/app/core/model/reservation';
 import { forkJoin, take } from 'rxjs';
 
 @Component({
@@ -17,7 +17,7 @@ import { forkJoin, take } from 'rxjs';
   templateUrl: './book-accommodation.component.html'
 })
 export class BookAccommodationComponent implements OnInit {
-  private reservations: ReservationDto[] = [];
+  private reservations: Reservation[] = [];
   private availablePeriods: AvailabilityPeriod[] = [];
 
   @Input() accommodationId: string | undefined;
