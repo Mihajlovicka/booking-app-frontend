@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Add your review for accommodation and host</h2>
+
+<mat-dialog-content>
+  <div class="rating-item">
+    <p>Accommodation</p>
+    <div class="stars">
+      <span *ngFor="let star of [1,2,3,4,5]"
+            (click)="setRating('item1', star)"
+            [class.filled]="star <= item1Rating">&#9733;</span>
+    </div>
+  </div>
+
+  <div class="rating-item">
+    <p>Host</p>
+    <div class="stars">
+      <span *ngFor="let star of [1,2,3,4,5]"
+            (click)="setRating('item2', star)"
+            [class.filled]="star <= item2Rating">&#9733;</span>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Close</button>
+  <button mat-raised-button color="primary" (click)="submit()" [disabled]="disableSubmit()">Send</button>
+</mat-dialog-actions>

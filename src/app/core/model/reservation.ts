@@ -7,4 +7,5 @@ export interface Reservation {
   guestNumber: number;
   finalPrice: number;
   accommodationName?: string;
+  hostUsername: string;
 }

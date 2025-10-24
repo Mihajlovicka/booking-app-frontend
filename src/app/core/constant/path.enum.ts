@@ -8,6 +8,7 @@ const notificationBaseAPI = environment.notification_api;
 const authServiceAPI = userBaseAPI + 'auth/';
 const userApi = userBaseAPI + 'user/';
 const accommodationServiceAPI = accommodationBaseAPI + 'accommodations';
+const reviewServiceAPI = bookingBaseAPI + 'reviews';
 
 export const Path = {
   Register: authServiceAPI + 'register',
@@ -16,5 +17,6 @@ export const Path = {
   Accommodations: accommodationServiceAPI,
   User: userApi,
   ChangePassword: authServiceAPI + 'change-password',
-  Booking: bookingBaseAPI
+  Booking: bookingBaseAPI,
+  Reviews: reviewServiceAPI
 };
