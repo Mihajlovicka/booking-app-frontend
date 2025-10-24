@@ -10,13 +10,15 @@ import { FormsModule } from '@angular/forms'; // For [(ngModel)] if needed
 import { ChangeInfoComponent } from './features/user/profile/change-info/change-info.component';
 import { ChangePasswordComponent } from './features/user/profile/change-password/change-password.component';
 import { ProfileComponent } from './features/user/profile/profile.component';
+import { DeleteAccountComponent } from './features/user/profile/delete-account/delete-account.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
     ChangeInfoComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    DeleteAccountComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,9 @@
         <mat-list-item (click)="selectedTab = 'changePassword'"
           >Change Password</mat-list-item
         >
+        <mat-list-item (click)="selectedTab = 'delete'"
+          >Delete account</mat-list-item
+        >
       </mat-nav-list>
     </mat-drawer>
 
@@ -17,6 +20,9 @@
       </div>
       <div *ngIf="selectedTab === 'changePassword'">
         <app-change-password (changeTab)="resetTab()"></app-change-password>
+      </div>
+       <div *ngIf="selectedTab === 'delete'">
+        <app-delete-account></app-delete-account>
       </div>
     </mat-drawer-content>
   </mat-drawer-container>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
+  CheckDeleteAccount,
   LoginRequestDto,
   LoginResponseDto,
   RegistrationRequestDto,
@@ -26,6 +27,14 @@ export class UserService {
         localStorage.setItem('role', result.user.role);
       })
     );
+  }
+
+  deleteAccount(): Observable<void> {
+    return this.http.get<void>(`${Path.User}delete`);
+  }
+
+  checkDeleteAccount(): Observable<CheckDeleteAccount> {
+    return this.http.get<CheckDeleteAccount>(`${Path.Booking}user/delete-check`);
   }
 
   save(user: any) {
