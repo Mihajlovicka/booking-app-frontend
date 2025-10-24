@@ -5,6 +5,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { CoreModule } from 'src/app/core/core.module';
+import { DeleteAccountComponent } from './profile/delete-account/delete-account.component';
 
 @NgModule({
   declarations: [RegisterComponent, LoginComponent],

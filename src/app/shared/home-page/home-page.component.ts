@@ -39,10 +39,6 @@ export class HomePageComponent implements OnInit {
           this.accommodations = data;
         }
       });
-      this.availabilityService.not_found().subscribe({
-        next: () => {
-        }
-      });
     }
 
       applyFilter() {
@@ -56,6 +52,6 @@ export class HomePageComponent implements OnInit {
   }
 
   openDetails(id: string) {
-    this.router.navigate(['/accommodation', id]);
+    this.router.navigate(['/accommodations', id]);
   }
 }

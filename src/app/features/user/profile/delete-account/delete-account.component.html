@@ -1,0 +1,22 @@
+<div class="centered-container">
+  <mat-card class="main-card">
+    <mat-card-content>
+
+        <div>
+          <div class="row">
+            <div class="col-md-6" *ngIf="requestDenied">
+              Request is denied. There are open reservations.
+            </div>
+          </div>
+        </div>
+
+        <mat-card-actions class="button-container">
+          <div class="step-buttons">
+            <button mat-raised-button color="primary" type="button" (click)="deleteAccount()">
+              Delete Account
+            </button>
+          </div>
+        </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

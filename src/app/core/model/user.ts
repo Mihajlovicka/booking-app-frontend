@@ -62,3 +62,8 @@ export interface LoginResponseDto {
   user: UserDto;
   token: string;
 }
+
+
+export interface CheckDeleteAccount {
+  requestDenied: boolean;
+}

@@ -12,12 +12,12 @@ export class ReservationService {
   public constructor(private http: HttpClient) { }
 
   public createReservationRequest(dto: CreateReservationRequest): Observable<void> {
-    return this.http.post<void>(`${Path.Booking}/reservation-requests`, dto);
+    return this.http.post<void>(`${Path.Booking}reservation-requests`, dto);
   }
 
   public getReservationsByAccommodation(accommodationId: string): Observable<Reservation[]> {
     return this.http.get<Reservation[]>(
-      `${Path.Booking}/reservations/${accommodationId}`
+      `${Path.Booking}reservations/${accommodationId}`
     );
   }
 

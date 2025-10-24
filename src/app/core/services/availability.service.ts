@@ -13,10 +13,6 @@ export class AvailabilityService {
   public constructor(private http: HttpClient) { }
 
 
-   not_found(): Observable<any> {
-    return this.http.get(`${Path.Booking}accommodations/all`);
-  }
-
   search(filter? : AvailabilityFilter): Observable<Accommodation[]> {
     return this.http.post<Accommodation[]>(`${Path.Booking}accommodations/search`, filter);
   }
