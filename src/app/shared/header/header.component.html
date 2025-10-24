@@ -3,6 +3,24 @@
     >Booking</span
   >
   <span class="example-spacer"></span>
+
+  <button mat-icon-button [matMenuTriggerFor]="matMenuNotif" *ngIf="isLoggedIn()">
+    <mat-icon>notifications</mat-icon>
+    <span class="badge">
+      <span>{{ unseenCount$ | async }}</span>
+    </span>
+  </button>
+
+  <mat-menu #matMenuNotif="matMenu">
+    <ng-container *ngFor="let notif of notifications$ | async">
+  <button mat-menu-item 
+          [ngClass]="{'seen': notif.seen}"
+          (click)="onNotificationClick(notif)">
+    {{ notif.message }}
+  </button>
+</ng-container>
+  </mat-menu>
+
   <button
     mat-icon-button
     style="font-size: 14px; width: 100px"

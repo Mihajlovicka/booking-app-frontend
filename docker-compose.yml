@@ -102,7 +102,8 @@ services:
       - SERVICE_NAME=notification_service
       - OTEL_COLLECTOR=http://otel-collector:4317
       - LOKI=http://loki:3100
-      - ConnectionStrings__DefaultConnection=mongodb://root:admin@db_nosql:27017/booking-notification-service
+      - ConnectionStrings__MongoDb=mongodb://root:admin@db_nosql:27017/booking-notification-service
+      - MongoDatabaseName=booking-notification-service
 
   booking_front:
     build:
@@ -127,3 +128,4 @@ networks:
   mynet:
     driver: bridge
     name: mynet
+    external: true

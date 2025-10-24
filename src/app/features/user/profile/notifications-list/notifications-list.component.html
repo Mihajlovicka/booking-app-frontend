@@ -1,0 +1,32 @@
+<div class="centered-container">
+  <mat-card class="main-card">
+    <mat-card-header class="centered-header">
+      <mat-card-title class="title">Change notifications you will receive</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div>
+          <div class="row">
+            <div class="col-md-6">
+               <mat-form-field class="compact-field">
+                <mat-label>Notification type</mat-label>
+                <mat-select [(ngModel)]="choosenNotifications" multiple [compareWith]="compareFn">
+                  <mat-option *ngFor="let not of allNotifications" [value]="not">
+                    {{ not.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <mat-card-actions class="button-container">
+          <div class="step-buttons">
+            <button mat-raised-button color="primary" (click)="save()">
+              Save
+            </button>
+          </div>
+        </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

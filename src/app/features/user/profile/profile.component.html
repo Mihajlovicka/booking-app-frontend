@@ -9,7 +9,9 @@
           >Change Password</mat-list-item
         >
         <mat-list-item (click)="selectedTab = 'delete'"
-          >Delete account</mat-list-item
+          >Delete account</mat-list-item>
+        <mat-list-item (click)="selectedTab = 'notifications'"
+          >Notifications setup</mat-list-item
         >
       </mat-nav-list>
     </mat-drawer>
@@ -23,6 +25,9 @@
       </div>
        <div *ngIf="selectedTab === 'delete'">
         <app-delete-account></app-delete-account>
+        </div>
+      <div *ngIf="selectedTab === 'notifications'">
+        <app-notifications-list (changeTab)="resetTab()"></app-notifications-list>
       </div>
     </mat-drawer-content>
   </mat-drawer-container>

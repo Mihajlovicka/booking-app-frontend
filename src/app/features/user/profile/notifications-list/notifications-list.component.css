@@ -1,0 +1,82 @@
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Garamond, serif;
+}
+
+.main-card {
+  width: 100%;
+  max-width: 600px; /* Reduced width */
+  padding: 1rem;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.centered-header {
+  text-align: center;
+}
+
+.sub-card {
+  margin-top: 1rem;
+  padding: 0.5rem; /* Reduced padding */
+  border: 1px solid white;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.compact-field {
+  width: 100%;
+  margin-bottom: 0.5rem; /* Reduced margin for spacing */
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem; /* Reduced gap */
+}
+
+.col-md-6 {
+  flex: 1;
+}
+
+.col-md-12 {
+  flex: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.next-button {
+  margin-left: auto;
+}
+
+.step-buttons {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}
+
+mat-form-field.compact-field {
+  width: 100%;
+}
+
+.title {
+  font-size: 1.8rem; /* Adjust the size as needed */
+}
+
+mat-card-title {
+  font-weight: bold;
+}
+
+mat-card-title,
+mat-form-field,
+input,
+textarea,
+mat-label,
+mat-error {
+  font-family: Garamond, serif;
+}

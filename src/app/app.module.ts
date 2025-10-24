@@ -11,6 +11,7 @@ import { ChangeInfoComponent } from './features/user/profile/change-info/change-
 import { ChangePasswordComponent } from './features/user/profile/change-password/change-password.component';
 import { ProfileComponent } from './features/user/profile/profile.component';
 import { DeleteAccountComponent } from './features/user/profile/delete-account/delete-account.component';
+import { NotificationsListComponent } from './features/user/profile/notifications-list/notifications-list.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DeleteAccountComponent } from './features/user/profile/delete-account/d
     ProfileComponent,
     ChangeInfoComponent,
     ChangePasswordComponent,
-    DeleteAccountComponent
+    DeleteAccountComponent,
+    NotificationsListComponent
   ],
   imports: [
     BrowserModule,
