@@ -38,6 +38,10 @@
           <p><strong>Price:</strong> {{ reservation.finalPrice }}</p>
           <p><strong>Guests:</strong> {{ reservation.guestNumber }}</p>
         </mat-card-content>
+
+        <mat-card-actions align="end">
+          <button mat-stroked-button color="warn" (click)="openReviewDialog(reservation.id)">Add review</button>
+        </mat-card-actions>
       </mat-card>
     </div>
   </div>

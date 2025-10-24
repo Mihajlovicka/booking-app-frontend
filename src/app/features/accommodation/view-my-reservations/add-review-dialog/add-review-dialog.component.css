@@ -1,0 +1,17 @@
+.rating-item {
+  margin: 15px 0;
+}
+
+.stars {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.stars span {
+  color: #ccc;
+  margin: 0 2px;
+}
+
+.stars span.filled {
+  color: gold;
+}

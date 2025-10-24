@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { ViewMyReservationRequestsComponent } from './view-my-reservation-requests/view-my-reservation-requests.component';
 import { ViewMyReservationsComponent } from './view-my-reservations/view-my-reservations.component';
+import { AddReviewDialogComponent } from './view-my-reservations/add-review-dialog/add-review-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ViewMyReservationsComponent } from './view-my-reservations/view-my-rese
     RequestReservationDialogComponent,
     ViewReservationRequestsComponent,
     ViewMyReservationRequestsComponent,
-    ViewMyReservationsComponent
+    ViewMyReservationsComponent,
+    AddReviewDialogComponent
   ],
   imports: [
     CommonModule,

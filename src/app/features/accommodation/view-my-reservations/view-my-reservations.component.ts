@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { EMPTY, switchMap, take } from 'rxjs';
 import { Reservation } from 'src/app/core/model/reservation';
 import { ReservationService } from 'src/app/core/services/reservation.service';
+import { AddReviewDialogComponent } from './add-review-dialog/add-review-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ReviewService } from 'src/app/core/services/review.service';
+import { Review } from 'src/app/core/model/review';
 
 @Component({
   selector: 'app-view-my-reservations',
@@ -11,7 +15,11 @@ import { ReservationService } from 'src/app/core/services/reservation.service';
 export class ViewMyReservationsComponent implements OnInit {
   public reservations: Reservation[] = [];
 
-  public constructor(private readonly reservationService: ReservationService) { }
+  public constructor(
+    private readonly reservationService: ReservationService,
+    private readonly dialog: MatDialog,
+    private readonly reviewService: ReviewService
+  ) { }
 
   public ngOnInit(): void {
     this.reservationService.getMyReservations()
@@ -70,5 +78,45 @@ export class ViewMyReservationsComponent implements OnInit {
     const startDate = this.getDateOnly(reservation.startDate);
     const today = this.getDateOnly(new Date());
     return startDate > today;
+  }
+
+  public openReviewDialog(reservationId: number): void {
+    const dialogRef = this.dialog.open(AddReviewDialogComponent, {
+      width: '350px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+
+        const r1 = {
+          grade: result.item1,
+          reviewFor: 'ACCOMMODATION',
+          entityInfo: this.getAccommodationIdFromReservation(reservationId)
+        } as Review;
+
+        const r2 = {
+          grade: result.item2,
+          reviewFor: 'HOST',
+          entityInfo: this.getHostUsernameFromReservation(reservationId)
+      } as Review;
+
+      console.log(r1);
+      console.log(r2);
+
+        this.reviewService.addReview([r1, r2])
+          .pipe(take(1))
+          .subscribe();
+      }
+    });
+  }
+
+  private getAccommodationIdFromReservation(reservationId: number): string {
+    const reservation = this.reservations.find(r => r.id === reservationId);
+    return reservation ? reservation.accommodationExternalId : "";
+  }
+
+  private getHostUsernameFromReservation(reservationId: number): string {
+    const reservation = this.reservations.find(r => r.id === reservationId);
+    return reservation ? reservation.hostUsername : "";
   }
 }
