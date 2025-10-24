@@ -16,6 +16,7 @@
         <mat-card-content>
           <p><strong>Price:</strong> {{ reservation.finalPrice }}</p>
           <p><strong>Guests:</strong> {{ reservation.guestNumber }}</p>
+          <p><strong>Average Grade:</strong> {{ reservation.averageGrade }}</p>
         </mat-card-content>
 
         <mat-card-actions align="end">
@@ -37,10 +38,14 @@
         <mat-card-content>
           <p><strong>Price:</strong> {{ reservation.finalPrice }}</p>
           <p><strong>Guests:</strong> {{ reservation.guestNumber }}</p>
+          <p><strong>Average Grade:</strong> {{ reservation.averageGrade }}</p>
         </mat-card-content>
 
         <mat-card-actions align="end">
-          <button mat-stroked-button color="warn" (click)="openReviewDialog(reservation.id)">Add review</button>
+          <button mat-stroked-button color="warn"
+            (click)="openReviewDialog(reservation.id, reservation.accommodationExternalId)">Review</button>
+          <button mat-stroked-button color="warn" *ngIf="reservation.hasReview"
+            (click)="onDeleteClick(reservation.accommodationExternalId)">Delete review</button>
         </mat-card-actions>
       </mat-card>
     </div>

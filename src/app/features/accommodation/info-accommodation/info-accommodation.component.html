@@ -4,6 +4,7 @@
       <mat-nav-list>
         <mat-list-item (click)="selectedTab = 'info'">Info</mat-list-item>
         <mat-list-item *ngIf="isUserGuest()" (click)="selectedTab = 'book'">Book Accommodation</mat-list-item>
+        <mat-list-item *ngIf="isUserGuest()" (click)="selectedTab = 'reviews'">Reviews</mat-list-item>
         <mat-list-item *ngIf="!isUserGuest()" (click)="selectedTab = 'availability'"
           >Define Availability</mat-list-item
         >
@@ -31,6 +32,7 @@
               <strong>Guests:</strong> {{ accommodation.minNumberOfGuests }} -
               {{ accommodation.maxNumberOfGuests }}
             </p>
+            <p> Average Grade: {{ avgGrade }}</p>
             <p>
               <strong>Equipment:</strong>
               <span *ngIf="accommodation.equipments?.length; else noEquipment">
@@ -90,6 +92,9 @@
       </div>
       <div *ngIf="selectedTab === 'reservationRequests'">
         <app-view-reservation-requests [accommodation]="accommodation" />
+      </div>
+      <div *ngIf="selectedTab === 'reviews'">
+        <app-accommodation-reviews [accommodationId]="accommodation.id"/>
       </div>
     </mat-drawer-content>
   </mat-drawer-container>

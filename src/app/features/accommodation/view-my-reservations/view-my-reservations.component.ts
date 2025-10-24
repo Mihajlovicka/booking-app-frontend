@@ -5,7 +5,7 @@ import { ReservationService } from 'src/app/core/services/reservation.service';
 import { AddReviewDialogComponent } from './add-review-dialog/add-review-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ReviewService } from 'src/app/core/services/review.service';
-import { Review } from 'src/app/core/model/review';
+import { Review, ReviewFor, ViewHostAccommodationReviewDto } from 'src/app/core/model/review';
 
 @Component({
   selector: 'app-view-my-reservations',
@@ -80,34 +80,68 @@ export class ViewMyReservationsComponent implements OnInit {
     return startDate > today;
   }
 
-  public openReviewDialog(reservationId: number): void {
-    const dialogRef = this.dialog.open(AddReviewDialogComponent, {
-      width: '350px'
-    });
+  public openReviewDialog(reservationId: number, accommodationExternalId: string): void {
+    this.reviewService.getaccrater(accommodationExternalId)
+      .pipe(take(1))
+      .subscribe({
+        next: (data: ViewHostAccommodationReviewDto | null) => {
+          // Ako nema prethodnog review-a, stavimo default 0
+          const item1Rating = data?.accommodationGrade ?? 0;
+          const item2Rating = data?.hostGrade ?? 0;
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+          const dialogRef = this.dialog.open(AddReviewDialogComponent, {
+            width: '350px',
+            data: { item1Rating, item2Rating }
+          });
 
-        const r1 = {
-          grade: result.item1,
-          reviewFor: 'ACCOMMODATION',
-          entityInfo: this.getAccommodationIdFromReservation(reservationId)
-        } as Review;
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              const r1: Review = {
+                grade: result.item1,
+                reviewFor: ReviewFor.ACCOMMODATION,
+                entityInfo: this.getAccommodationIdFromReservation(reservationId)
+              };
 
-        const r2 = {
-          grade: result.item2,
-          reviewFor: 'HOST',
-          entityInfo: this.getHostUsernameFromReservation(reservationId)
-      } as Review;
+              const r2: Review = {
+                grade: result.item2,
+                reviewFor: ReviewFor.HOST,
+                entityInfo: this.getHostUsernameFromReservation(reservationId)
+              };
 
-      console.log(r1);
-      console.log(r2);
+              this.reviewService.addReview([r1, r2])
+                .pipe(take(1))
+                .subscribe(() => {
+                  this.reservationService.getMyReservations()
+                    .pipe(take(1))
+                    .subscribe(data => this.reservations = data);
+                });
+            }
+          });
+        },
+        error: (err) => {
+          console.error('Failed to fetch rater review', err);
+        }
+      });
+  }
 
-        this.reviewService.addReview([r1, r2])
-          .pipe(take(1))
-          .subscribe();
-      }
-    });
+
+  public onDeleteClick(id: string): void {
+
+    this.reviewService.delete(id)
+      .pipe(
+        take(1),
+        switchMap(_ => {
+          return this.reservationService.getMyReservations();
+        })
+      )
+      .subscribe({
+        next: (data) => {
+          this.reservations = data;
+        },
+        error: (err) => {
+          console.error('Failed to delete review', err);
+        }
+      });
   }
 
   private getAccommodationIdFromReservation(reservationId: number): string {

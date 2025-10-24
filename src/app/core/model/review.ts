@@ -11,3 +11,14 @@ export enum ReviewFor
     HOST = "HOST",
     ACCOMMODATION = "ACCOMMODATION"
 }
+
+
+export interface ViewHostAccommodationReviewDto
+{
+    hostGrade: number;
+    hostUsername: string
+    accommodationGrade: number;
+    accommodationName: string;
+    accommodationExternalId: string;
+    raterUserName: string;
+}

@@ -11,7 +11,7 @@
       </mat-nav-list>
     </mat-drawer>
 
-    
+
     <mat-drawer-content>
         <div *ngIf="selectedTab === 'all'" style="width: 100%">
             <div class="accommodation-grid">
@@ -29,6 +29,7 @@
             <mat-card-content>
                 <h3>{{ accommodation.name }}</h3>
                 <p>{{ accommodation.address.city }}, {{ accommodation.address.country }}</p>
+                <p> Average Grade: {{ accommodation.averageGrade}}</p>
             </mat-card-content>
             </mat-card>
         </div>

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { Accommodation } from 'src/app/core/model/accommodation';
 import { AccommodationService } from 'src/app/core/services/accommodation.service';
+import { ReviewService } from 'src/app/core/services/review.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -13,13 +14,15 @@ import { UserService } from 'src/app/core/services/user.service';
 export class InfoAccommodationComponent {
   accommodation: Accommodation | null = null;
   currentImageIndex = 0;
-  selectedTab: 'info' | 'edit' | 'availability' | 'book' | 'reservationRequests' = 'info';
+  selectedTab: 'info' | 'edit' | 'availability' | 'book' | 'reservationRequests' | 'reviews'= 'info';
+  public avgGrade: number = 0;
 
   public constructor(
     private route: ActivatedRoute,
     private accommodationService: AccommodationService,
     private readonly userService: UserService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly reviewService: ReviewService
   ) { }
 
   public ngOnInit(): void {
@@ -44,6 +47,12 @@ export class InfoAccommodationComponent {
           }
         });
       }
+
+      this.reviewService.getAvgGradeForAccommodation(id).pipe(take(1)).subscribe(
+        data => {
+          this.avgGrade = data;
+        }
+      );
     }
   }
 
@@ -61,14 +70,6 @@ export class InfoAccommodationComponent {
     if (this.currentImageIndex > 0) {
       this.currentImageIndex--;
     }
-  }
-
-  reserve() {
-    // open reservation dialog or navigate to reservation form
-  }
-
-  edit() {
-    // navigate to edit form for this accommodation
   }
 
   public onPriceTypeUpdate(event: any): void {

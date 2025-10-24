@@ -8,4 +8,6 @@ export interface Reservation {
   finalPrice: number;
   accommodationName?: string;
   hostUsername: string;
+  averageGrade: number;
+  hasReview?: boolean;
 }
