@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ViewMyReservationRequestsComponent } from './view-my-reservation-requests/view-my-reservation-requests.component';
 import { ViewMyReservationsComponent } from './view-my-reservations/view-my-reservations.component';
 import { AddReviewDialogComponent } from './view-my-reservations/add-review-dialog/add-review-dialog.component';
+import { AccommodationReviewsComponent } from './accommodation-reviews/accommodation-reviews.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AddReviewDialogComponent } from './view-my-reservations/add-review-dial
     ViewReservationRequestsComponent,
     ViewMyReservationRequestsComponent,
     ViewMyReservationsComponent,
-    AddReviewDialogComponent
+    AddReviewDialogComponent,
+    AccommodationReviewsComponent
   ],
   imports: [
     CommonModule,

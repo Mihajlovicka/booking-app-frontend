@@ -24,6 +24,7 @@ export class UserService {
     return this.http.post<LoginResponseDto>(Path.Login, user).pipe(
       tap((result) => {
         localStorage.setItem('token', result.token);
+        localStorage.setItem('name', result.user.username);
         localStorage.setItem('role', result.user.role);
       })
     );
@@ -55,6 +56,10 @@ export class UserService {
 
   getRole(): string | null {
     return localStorage.getItem('role');
+  }
+
+  getLoggedUsername(): string | null {
+    return localStorage.getItem('name');
   }
 
   isLoggedIn(): boolean {

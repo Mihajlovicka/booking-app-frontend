@@ -15,3 +15,19 @@
 .stars span.filled {
   color: gold;
 }
+
+.stars {
+  display: flex;
+  gap: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.stars span {
+  color: lightgray; /* default boja */
+  transition: color 0.2s;
+}
+
+.stars span.filled {
+  color: gold; /* obojene zvezdice */
+}

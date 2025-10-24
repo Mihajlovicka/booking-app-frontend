@@ -6,7 +6,7 @@
     <div class="stars">
       <span *ngFor="let star of [1,2,3,4,5]"
             (click)="setRating('item1', star)"
-            [class.filled]="star <= item1Rating">&#9733;</span>
+            [class.filled]="star <= currentItem1Rating">&#9733;</span>
     </div>
   </div>
 
@@ -15,7 +15,7 @@
     <div class="stars">
       <span *ngFor="let star of [1,2,3,4,5]"
             (click)="setRating('item2', star)"
-            [class.filled]="star <= item2Rating">&#9733;</span>
+            [class.filled]="star <= currentItem2Rating">&#9733;</span>
     </div>
   </div>
 </mat-dialog-content>

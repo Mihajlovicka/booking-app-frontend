@@ -34,4 +34,5 @@ export interface Accommodation {
   maxNumberOfGuests?: number;
   pictures: string[];
   priceType: PriceType;
+  averageGrade: number;
 }
